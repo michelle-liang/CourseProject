@@ -73,7 +73,7 @@ public class Sensors {
 	 * @return all available sensors.
 	 * @throws IOException
 	 */
-	public static Set<Sensor> getSensors() throws IOException {
+	public static Set<Sensor> getSensors()  {
 		Set<Sensor> sensors = new HashSet<Sensor>();
 //		addDallasSensors(sensors);
 		addDHTSensors(sensors);
