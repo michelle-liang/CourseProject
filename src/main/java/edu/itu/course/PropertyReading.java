@@ -80,4 +80,18 @@ public class PropertyReading {
 		}
 		return typeStr;
 	}
+	public String getDeviceId() {
+		Properties props = new Properties();
+		try {
+			props.load(PropertyReading.class.getResourceAsStream("/xbee.properties"));
+		} catch (IOException e) {
+			System.out.println("Could not find sensors properties!");
+			e.printStackTrace();
+		}
+		String typeStr = props.getProperty("deviceId");
+		if (null == typeStr) {
+			return "";
+		}
+		return typeStr;
+	}
 }
