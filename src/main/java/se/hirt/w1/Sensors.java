@@ -83,7 +83,7 @@ public class Sensors {
 	private static void addDHTSensors(Set<Sensor> sensors) {
 		Properties props = new Properties();
 		try {
-			props.load(Sensors.class.getResourceAsStream("dhtsensors.properties"));
+			props.load(Sensors.class.getResourceAsStream("/dhtsensors.properties"));
 		} catch (IOException e) {
 			System.out.println("Could not find sensors properties!");
 			e.printStackTrace();
