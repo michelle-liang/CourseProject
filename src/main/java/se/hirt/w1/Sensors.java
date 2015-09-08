@@ -80,6 +80,41 @@ public class Sensors {
 		return sensors;
 	}
 
+
+	public static DHTSensor getDHTSensor() {
+		Properties props = new Properties();
+		DHTSensor sensor = null;
+		try {
+			props.load(Sensors.class.getResourceAsStream("/dhtsensors.properties"));
+		} catch (IOException e) {
+			System.out.println("Could not find sensors properties!");
+			e.printStackTrace();
+			return null;
+		}
+		for (int i = 0; true; i++) {
+			String typeStr = props.getProperty(String.format("sensor%d.type", i));
+			if (typeStr == null) {
+				break;
+			}
+			DHTType type = DHTType.getType(typeStr);
+			if (type != null) {
+				String pin = props.getProperty(String.format("sensor%d.pin", i));
+				if (pin == null) {
+					continue;
+				}
+				sensor = new DHTSensor(type, Integer.parseInt(pin));
+				
+				
+//				sensors.add(new DHTTemperature(sensor));
+//				sensors.add(new DHTHygrometer(sensor));
+			} else {
+				System.err.println("No support for type " + type + ". Continuing.");
+				return null;
+			}
+		}
+		return sensor;
+	}
+	
 	private static void addDHTSensors(Set<Sensor> sensors) {
 		Properties props = new Properties();
 		try {
